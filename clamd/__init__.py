@@ -275,13 +275,26 @@ class ClamdUnixSocket(ClamdNetworkSocket):
     """
     Class for using clamd with an unix socket
     """
-    def __init__(self, path="/var/run/clamav/clamd.ctl", timeout=None):
+    def __init__(self, path="/run/clamav/clamd.sock", timeout=None):
         """
-        class initialisation
-
         path (string) : unix socket path
         timeout (float or None) : socket timeout
         """
+        if not os.path.exists(path):
+            if not os.path.isfile(clamd_cfg_path := '/etc/clamav/clamd.conf'):
+                raise ValueError(f'clamd socket does not exist at {path=}')
+            # lookup in clamd.conf
+            with open(clamd_cfg_path, 'r') as f:
+                for line in f.readlines():
+                    if not line.startswith('LocalSocket'):
+                        continue
+                    path = line.split(' ', 1)[-1].strip()
+                    break
+                else:
+                    raise ValueError(f'did not find `LocalSocket` directive in {clamd_cfg_path=}')
+
+        if not os.path.exists(path):
+            raise ValueError(f'clamd socket not found at {path=}')
 
         self.unix_socket = path
         self.timeout = timeout
