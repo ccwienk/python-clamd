@@ -4,6 +4,9 @@ import ez_setup
 ez_setup.use_setuptools()
 
 import setuptools
+import os
+
+own_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 readme = open('README.rst').read()
@@ -20,8 +23,7 @@ setuptools.setup(
     description = "Clamd is a python interface to Clamd (Clamav daemon).",
     long_description=readme + '\n\n' + history,
     url='https://github.com/ccwienk/python-clamd',
-    package_dir={'': 'src'},
-    packages=setuptools.find_packages('src', exclude='tests'),
+    packages=setuptools.find_packages(own_dir, exclude='tests'),
     python_requires='>=3.9.*',
     classifiers = [
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
