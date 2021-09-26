@@ -8,12 +8,13 @@ except:
 # $Source$
 
 
-import socket
-import sys
-import struct
-import contextlib
-import re
 import base64
+import contextlib
+import os
+import re
+import socket
+import struct
+import sys
 
 scan_response = re.compile(r"^(?P<path>.*): ((?P<virus>.+) )?(?P<status>(FOUND|OK|ERROR))$")
 EICAR = base64.b64decode(
