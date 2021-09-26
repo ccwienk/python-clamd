@@ -1,6 +1,4 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 try:
     __version__ = __import__('pkg_resources').get_distribution('clamd').version
@@ -40,7 +38,7 @@ class ConnectionError(ClamdError):
     """Class for errors communication with clamd"""
 
 
-class ClamdNetworkSocket(object):
+class ClamdNetworkSocket:
     """
     Class for using clamd with a network socket
     """
