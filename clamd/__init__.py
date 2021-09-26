@@ -9,7 +9,6 @@ except:
 
 
 import base64
-import contextlib
 import os
 import re
 import socket
@@ -237,7 +236,7 @@ class ClamdNetworkSocket:
         receive line from clamd
         """
         try:
-            with contextlib.closing(self.clamd_socket.makefile('rb')) as f:
+            with self.clamd_socket.makefile('rb') as f:
                 return f.readline().decode('utf-8').strip()
         except (socket.error, socket.timeout):
             e = sys.exc_info()[1]
@@ -248,7 +247,7 @@ class ClamdNetworkSocket:
         receive multiple line response from clamd and strip all whitespace characters
         """
         try:
-            with contextlib.closing(self.clamd_socket.makefile('rb')) as f:
+            with self.clamd_socket.makefile('rb') as f:
                 return f.read().decode('utf-8')
         except (socket.error, socket.timeout):
             e = sys.exc_info()[1]
