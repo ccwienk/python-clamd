@@ -4,7 +4,8 @@ Changes
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove support for python < 3.9
+- flatten repository
 
 
 1.0.2 (2014-08-21)
