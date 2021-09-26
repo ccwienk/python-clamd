@@ -22,6 +22,7 @@ setuptools.setup(
     url='https://github.com/ccwienk/python-clamd',
     package_dir={'': 'src'},
     packages=setuptools.find_packages('src', exclude='tests'),
+    python_requires='>=3.9.*',
     classifiers = [
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
     ],
